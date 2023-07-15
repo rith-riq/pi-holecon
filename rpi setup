@@ -1,0 +1,9 @@
+downlaod rpi OS from https://www.raspberrypi.com/software/
+use raspberry pi imager to load os to drive
+finish installation
+set static ip
+    ifconfig
+    sudo nano /etc/dhcpcd.conf 
+    interface eth0
+    static ip_address=192.167.0.176
+save and reboot pi
