@@ -5,5 +5,9 @@ set static ip
     ifconfig
     sudo nano /etc/dhcpcd.conf 
     interface eth0
-    static ip_address=192.167.0.176
+    static ip_address=192.167.0.176 *make sure correct ip address
 save and reboot pi
+
+regarding raspi mirror
+sudo nano /etc/apt/sources.list
+http://www.raspbian.org/RaspbianMirrors
