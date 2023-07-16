@@ -1,0 +1,25 @@
+HOW TO FIX DRIVE (MBR) PROBLEMS WITH DISKPART ON WINDOWS 10
+
+Open Start.
+Search for Command Prompt, right-click the top result, and select the Run as administrator option.
+Type the following command to launch DiskPart and press Enter: diskpart
+Type the following command to list all the active drives and press Enter: list disk
+Type the following command to select the drive to clean and press Enter: select disk DISK-NUMBER
+In the command, replace "DISK-NUMBER" with the drive number you want to repair as it appears in the "Disk" column. You could erase the wrong drive if you do not perform this step correctly. Proceed with caution.
+Type the following command to wipe out the drive and press Enter: clean
+Enter: list disk
+Quick note: The output should include an asterisk (*) next to the selected drive. If the correct storage is not specified, perform step 5 again.
+(Optional) Type the following command to convert the drive to an MBR partition style and press Enter: convert mbr
+Quick note: This step is only required if the storage is configured as GPT, and you must use MBR partition style. If the partition is already MBR, you don't need to run the command, but running the command won't affect the process. You should be able to determine the partition type with the list disk command. If the drive doesn't have a GPT mark (*), it's an MBR partition.
+Type the following command to create a new partition and press Enter: create partition primary
+Type the following command to select the new primary partition and press Enter: select partition 1
+Type the following command to make the partition active and press Enter: active
+Quick tip: You only need to set a partition as active when using MBR. You can determine if the drive uses an MBR or GPT partition style with the list disk command. If the partition has a mark in the GPT column, it's not an MBR partition. If you need to set up a GPT partition style, use the other steps (see below).
+Type the following command to format the partition using the NTFS file system, set a drive label, and press Enter: format fs=FILE-SYSTEM label=DRIVE-LABEL quick
+In the command, replace "FILE-SYSTEM" with the name of the file system you want to use, such as NTFS or FAT32, and replace "DRIVE-LABEL" with the name of the drive as you want it to appear on File Explorer. The quick option is optional to perform a format faster. However, if you are unsure about the drive's condition, it's best to skip the option. Depending on the hard drive's size, the format could take a long time. This example formats the drive using the NTFS file system and names the partition "myData": format fs=ntfs label=myData quick
+Type the following command to assign a letter and make the drive available on File Explorer, and press Enter: assign letter=DRIVE-LETTER
+In the command, change "DRIVE-LETTER" for the letter to use on the drive, which is not assigned to another device. This example assigns the "G" letter: assign letter=g
+
+Type the following command to terminate DiskPart and press Enter: exit
+Type the following command to close Command Prompt and press Enter: exit
+Once you complete the steps, if the drive does not have physical issues, it should now be available through File Explorer, and you can begin to store files on it.
