@@ -11,3 +11,7 @@ save and reboot pi
 regarding raspi mirror
 sudo nano /etc/apt/sources.list
 http://www.raspbian.org/RaspbianMirrors
+
+rpi temp
+/usr/bin/vcgencmd measure_temp
+
